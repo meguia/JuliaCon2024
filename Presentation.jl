@@ -15,7 +15,7 @@ html"<button onclick='present()'>present</button>"
 
 # ╔═╡ d1bd1cc1-fc46-4971-a913-3b85d9ad447e
 @htl """
-        <h2 style="text-align:center">Este es un titulo 2</h2>
+        <h1 style="text-align:center">Este es un titulo </h1>
  		<p style="text-align:center">
  		Aca estamos
  		</p>
@@ -1169,12 +1169,12 @@ version = "1.4.1+1"
 
 # ╔═╡ Cell order:
 # ╟─1adbf6e0-2dd2-11ef-1ef5-b91dcae29094
-# ╟─05a95487-175f-4048-9011-a750630b4b9e
 # ╟─7b9dba35-4de7-4d24-8182-a37cf9f654da
-# ╠═540fdaf5-b72a-44b1-a15b-059782d7ad65
+# ╟─540fdaf5-b72a-44b1-a15b-059782d7ad65
 # ╟─d1bd1cc1-fc46-4971-a913-3b85d9ad447e
 # ╟─b021e1d7-9d84-4e56-8dae-de96c4495b70
-# ╠═00f2f279-0f48-427c-88c9-b33f786dde79
+# ╟─00f2f279-0f48-427c-88c9-b33f786dde79
+# ╟─05a95487-175f-4048-9011-a750630b4b9e
 # ╠═62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

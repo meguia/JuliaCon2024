@@ -7,25 +7,14 @@ using InteractiveUtils
 # ╔═╡ 1adbf6e0-2dd2-11ef-1ef5-b91dcae29094
 using PlutoUI, Plots, HypertextLiteral
 
-# ╔═╡ 05a95487-175f-4048-9011-a750630b4b9e
-TableOfContents()
-
 # ╔═╡ 7b9dba35-4de7-4d24-8182-a37cf9f654da
 html"<button onclick='present()'>present</button>"
 
 # ╔═╡ d1bd1cc1-fc46-4971-a913-3b85d9ad447e
 @htl """
-        <h1 style="text-align:center">Este es un titulo </h1>
+        <h1 style="text-align:center">LAPSo </h1>
  		<p style="text-align:center">
- 		Aca estamos
- 		</p>
-"""
-
-# ╔═╡ b021e1d7-9d84-4e56-8dae-de96c4495b70
-@htl """
-        <h1 style="text-align:center">Este es un titulo 1</h1>
- 		<p style="text-align:center">
- 		Aca estamos
+ 		- Aca estamos
  		</p>
 """
 
@@ -46,8 +35,48 @@ make_title(
 	"Sonification",
 	"Real Time ODEs for Sound Synthesis and Parameter Exploration",
 	"Manuel Eguia, Antonio Ortega Brook, Dario Ruiz",
-	"((LAPSo)) Laboratorio de Acustica y Percpecion Sonora"
+	"((LAPSo)) Laboratorio de Acustica y Percepcion Sonora"
 )
+
+# ╔═╡ 242f4ce1-a7ce-434c-bdf1-67b635f27b91
+function make_list_slide(title::String, list::Vector{String}, foot::String, color::String="#FFFFFF",font_size::Int=25)::HypertextLiteral.Result
+	style = "color:$(color);font-size:$(font_size)px"
+    @htl """
+        <h1 style="text-align:center">$(title)</h1>
+        <div style="padding:25px;text-align:left">
+		<ul>$((@htl("<li style=$(style)>$it") for it in list))</ul>
+		<hr style="background-color:$color">
+        <p style="font-size: 15px;text-align:right">$(foot)</p>
+        </div>
+    """
+end;
+
+# ╔═╡ b021e1d7-9d84-4e56-8dae-de96c4495b70
+make_list_slide(
+	"RealTimeAudioDiffEq.jl",
+	[
+		"item1",
+		"item2",
+		"item3"
+	],
+	"este es el pie"
+)
+
+# ╔═╡ ba25b6ce-160e-4b95-976e-87ac348150b8
+make_list_slide(
+	"Esta es una lista",
+	[
+		"item1",
+		"item2",
+		"item3"
+	],
+	"este es el pie",
+	"#0FFFF0", 25
+)
+		
+
+# ╔═╡ 05a95487-175f-4048-9011-a750630b4b9e
+TableOfContents()
 
 # ╔═╡ 62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 html"""
@@ -78,7 +107,7 @@ PlutoUI = "~0.7.59"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.10.3"
+julia_version = "1.10.4"
 manifest_format = "2.0"
 project_hash = "cb54df245d17250402c1d3aaa98dec8f26516d90"
 
@@ -1168,13 +1197,15 @@ version = "1.4.1+1"
 """
 
 # ╔═╡ Cell order:
-# ╟─1adbf6e0-2dd2-11ef-1ef5-b91dcae29094
+# ╠═1adbf6e0-2dd2-11ef-1ef5-b91dcae29094
 # ╟─7b9dba35-4de7-4d24-8182-a37cf9f654da
-# ╟─540fdaf5-b72a-44b1-a15b-059782d7ad65
-# ╟─d1bd1cc1-fc46-4971-a913-3b85d9ad447e
-# ╟─b021e1d7-9d84-4e56-8dae-de96c4495b70
-# ╟─00f2f279-0f48-427c-88c9-b33f786dde79
-# ╟─05a95487-175f-4048-9011-a750630b4b9e
+# ╠═540fdaf5-b72a-44b1-a15b-059782d7ad65
+# ╠═d1bd1cc1-fc46-4971-a913-3b85d9ad447e
+# ╠═b021e1d7-9d84-4e56-8dae-de96c4495b70
+# ╠═00f2f279-0f48-427c-88c9-b33f786dde79
+# ╠═242f4ce1-a7ce-434c-bdf1-67b635f27b91
+# ╠═ba25b6ce-160e-4b95-976e-87ac348150b8
+# ╠═05a95487-175f-4048-9011-a750630b4b9e
 # ╠═62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

@@ -19,7 +19,7 @@ html"<button onclick='present()'>present</button>"
  """
 
 # ╔═╡ 242f4ce1-a7ce-434c-bdf1-67b635f27b91
-function make_list_slide(title::String, list::Vector, foot::String, color::String="#FFFFFF",font_size::Int=25)::HypertextLiteral.Result
+function make_list_slide(title::String, list::Vector, foot::String; color::String="#FFFFFF",font_size::Int=25)::HypertextLiteral.Result
 	style = "color:$(color);font-size:$(font_size)px"
 	itlist = []
 	for it in list
@@ -44,10 +44,15 @@ end;
 make_list_slide(
 	"RealTimeAudioDiffEq.jl",
 	[
-		[@htl"It uses <u>DifferentialEquations.jl</u> and <u>libportaudio_jll.jl</u>"],
+		[@htl"""It uses <em><span style="color: #9090ff"><u>DifferentialEquations.jl</span></u></em> and <em><span style="color: #ff9090">libportaudio_jll.jl</span></em>"""],
 		"It works for ODEs and SDEs",  
-		"Este no es el item3"],
-	"este es el pie 3"
+		[@htl"""It creates a <span style="color: #ffff90">DESource</span> from <span style="color: #9090ff">DEFunctions</span> (2 for SDEs, 1 for ODEs)"""],
+		[@htl"""<span style="color: #ffff90">DESource</span> stores a <span style="color: #9090ff">DEProblem</span>, a portaudio <span style="color: #ff9090">Callback</span> function, and the state between callbacks"""],
+		[@htl"""<span style="color: #ffff90">start_DESource()</span> creates a portaudio <span style="color: #ff9090">Stream</span> and makes <span style="color: #ffff90">DESource</span> sound!"""],
+		[@htl"""The <span style="color: #ff9090">Callback</span> asynchronously invokes <span style="color: #9090ff"><em>solve()</em></span> to refill the audio buffer"""],
+		[@htl"""The parameters of the <span style="color: #9090ff">DEProblem</span>, the time-scaling and the mapping of the channels can be modified on the fly"""]
+	],
+	"este es el pie 3", font_size=20
 )
 
 # ╔═╡ 00f2f279-0f48-427c-88c9-b33f786dde79
@@ -71,7 +76,7 @@ make_title(
 )
 
 # ╔═╡ 5466df84-ee93-4382-bbb9-503d466b993e
-function make_text_slide(title::String, paragraphs::Vector, foot::String, color::String="#FFFFFF",font_size::Int=25)::HypertextLiteral.Result
+function make_text_slide(title::String, paragraphs::Vector, foot::String; color::String="#FFFFFF",font_size::Int=25)::HypertextLiteral.Result
 	style = "color:$(color);font-size:$(font_size)px"
 	itlist = []
 	for it in paragraphs
@@ -99,15 +104,17 @@ make_text_slide(
 		"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 		[@htl"""Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo <span style="color: #ff0000">consequat</span>. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""], 
 		"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-	], 
-	"Lapso 2", 
-	"#FFFF0F",22)
+	],
+	"Lapso 2",color="#FFFF0F")
 
 # ╔═╡ 62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 html"""
 <style>
 main {
-    max-width: 800px;
+    margin: 0 auto;
+    max-width: 1000px;
+	padding-left: max(20px, 5%);
+    padding-right: max(120px, 5%); 
 }
 input[type*="range"] {
 	width: 40%;
@@ -1226,8 +1233,8 @@ version = "1.4.1+1"
 # ╟─05a95487-175f-4048-9011-a750630b4b9e
 # ╟─7b9dba35-4de7-4d24-8182-a37cf9f654da
 # ╟─540fdaf5-b72a-44b1-a15b-059782d7ad65
-# ╟─d1bd1cc1-fc46-4971-a913-3b85d9ad447e
-# ╟─b021e1d7-9d84-4e56-8dae-de96c4495b70
+# ╠═d1bd1cc1-fc46-4971-a913-3b85d9ad447e
+# ╠═b021e1d7-9d84-4e56-8dae-de96c4495b70
 # ╟─ffac0a94-454c-4714-8514-04c106869969
 # ╠═242f4ce1-a7ce-434c-bdf1-67b635f27b91
 # ╠═00f2f279-0f48-427c-88c9-b33f786dde79

@@ -7,16 +7,48 @@ using InteractiveUtils
 # ╔═╡ 1adbf6e0-2dd2-11ef-1ef5-b91dcae29094
 using PlutoUI, Plots, HypertextLiteral
 
+# ╔═╡ 05a95487-175f-4048-9011-a750630b4b9e
+TableOfContents()
+
 # ╔═╡ 7b9dba35-4de7-4d24-8182-a37cf9f654da
 html"<button onclick='present()'>present</button>"
 
-# ╔═╡ d1bd1cc1-fc46-4971-a913-3b85d9ad447e
-@htl """
-        <h1 style="text-align:center">LAPSo </h1>
- 		<p style="text-align:center">
- 		- Aca estamos
- 		</p>
-"""
+# ╔═╡ ffac0a94-454c-4714-8514-04c106869969
+ @htl """
+ 	<h1 style="text-align:center"></h1>
+ """
+
+# ╔═╡ 242f4ce1-a7ce-434c-bdf1-67b635f27b91
+function make_list_slide(title::String, list::Vector, foot::String, color::String="#FFFFFF",font_size::Int=25)::HypertextLiteral.Result
+	style = "color:$(color);font-size:$(font_size)px"
+	itlist = []
+	for it in list
+		push!(itlist,@htl("<li style=$(style)>"))	
+		if typeof(it) == String
+			push!(itlist,it) 
+		else
+			push!(itlist,it[1]) 
+		end	
+	end	
+    @htl """
+        <h1 style="text-align:center">$(title)</h1>
+        <div style="padding:25px;text-align:left">
+		<ul>$(itlist)</ul>
+		<hr style="background-color:$color">
+        <p style="font-size: 18px; font-variant: small-caps; text-align:right">$(foot)</p>
+        </div>
+    """
+end;
+
+# ╔═╡ b021e1d7-9d84-4e56-8dae-de96c4495b70
+make_list_slide(
+	"RealTimeAudioDiffEq.jl",
+	[
+		[@htl"It uses <u>DifferentialEquations.jl</u> and <u>libportaudio_jll.jl</u>"],
+		"It works for ODEs and SDEs",  
+		"Este no es el item3"],
+	"este es el pie 3"
+)
 
 # ╔═╡ 00f2f279-0f48-427c-88c9-b33f786dde79
 function make_title(title::String, subtitle::String, author::String, affiliation::String)::HypertextLiteral.Result
@@ -32,51 +64,44 @@ end;
 
 # ╔═╡ 540fdaf5-b72a-44b1-a15b-059782d7ad65
 make_title(
-	"Sonification",
+	"JuliaCon 2024",
 	"Real Time ODEs for Sound Synthesis and Parameter Exploration",
 	"Manuel Eguia, Antonio Ortega Brook, Dario Ruiz",
 	"((LAPSo)) Laboratorio de Acustica y Percepcion Sonora"
 )
 
-# ╔═╡ 242f4ce1-a7ce-434c-bdf1-67b635f27b91
-function make_list_slide(title::String, list::Vector{String}, foot::String, color::String="#FFFFFF",font_size::Int=25)::HypertextLiteral.Result
+# ╔═╡ 5466df84-ee93-4382-bbb9-503d466b993e
+function make_text_slide(title::String, paragraphs::Vector, foot::String, color::String="#FFFFFF",font_size::Int=25)::HypertextLiteral.Result
 	style = "color:$(color);font-size:$(font_size)px"
+	itlist = []
+	for it in paragraphs
+		push!(itlist,@htl("<li style=$(style)>"))	
+		if typeof(it) == String
+			push!(itlist,it) 
+		else
+			push!(itlist,it[1]) 
+		end	
+	end	
     @htl """
         <h1 style="text-align:center">$(title)</h1>
         <div style="padding:25px;text-align:left">
-		<ul>$((@htl("<li style=$(style)>$it") for it in list))</ul>
+		<ul>$(itlist)</ul>
 		<hr style="background-color:$color">
-        <p style="font-size: 15px;text-align:right">$(foot)</p>
+        <p style="font-size: 18px; font-variant: small-caps; text-align:right">$(foot)</p>
         </div>
     """
 end;
 
-# ╔═╡ b021e1d7-9d84-4e56-8dae-de96c4495b70
-make_list_slide(
-	"RealTimeAudioDiffEq.jl",
+# ╔═╡ d1bd1cc1-fc46-4971-a913-3b85d9ad447e
+make_text_slide(
+	"((LAPSo))",
 	[
-		"item1",
-		"item2",
-		"item3"
-	],
-	"este es el pie"
-)
-
-# ╔═╡ ba25b6ce-160e-4b95-976e-87ac348150b8
-make_list_slide(
-	"Esta es una lista",
-	[
-		"item1",
-		"item2",
-		"item3"
-	],
-	"este es el pie",
-	"#0FFFF0", 25
-)
-		
-
-# ╔═╡ 05a95487-175f-4048-9011-a750630b4b9e
-TableOfContents()
+		"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		[@htl"""Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo <span style="color: #ff0000">consequat</span>. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""], 
+		"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+	], 
+	"Lapso 2", 
+	"#FFFF0F",22)
 
 # ╔═╡ 62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 html"""
@@ -1197,15 +1222,16 @@ version = "1.4.1+1"
 """
 
 # ╔═╡ Cell order:
-# ╠═1adbf6e0-2dd2-11ef-1ef5-b91dcae29094
+# ╟─1adbf6e0-2dd2-11ef-1ef5-b91dcae29094
+# ╟─05a95487-175f-4048-9011-a750630b4b9e
 # ╟─7b9dba35-4de7-4d24-8182-a37cf9f654da
-# ╠═540fdaf5-b72a-44b1-a15b-059782d7ad65
-# ╠═d1bd1cc1-fc46-4971-a913-3b85d9ad447e
-# ╠═b021e1d7-9d84-4e56-8dae-de96c4495b70
-# ╠═00f2f279-0f48-427c-88c9-b33f786dde79
+# ╟─540fdaf5-b72a-44b1-a15b-059782d7ad65
+# ╟─d1bd1cc1-fc46-4971-a913-3b85d9ad447e
+# ╟─b021e1d7-9d84-4e56-8dae-de96c4495b70
+# ╟─ffac0a94-454c-4714-8514-04c106869969
 # ╠═242f4ce1-a7ce-434c-bdf1-67b635f27b91
-# ╠═ba25b6ce-160e-4b95-976e-87ac348150b8
-# ╠═05a95487-175f-4048-9011-a750630b4b9e
+# ╠═00f2f279-0f48-427c-88c9-b33f786dde79
+# ╠═5466df84-ee93-4382-bbb9-503d466b993e
 # ╠═62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

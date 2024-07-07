@@ -18,7 +18,7 @@ html"<button onclick='present()'>present</button>"
  """
 
 # ╔═╡ 242f4ce1-a7ce-434c-bdf1-67b635f27b91
-function make_list_slide(title::String, list::Vector, foot::String; color::String="#000000",font_size::Int=25)::HypertextLiteral.Result
+function make_list_slide(title::String, list::Vector, foot::String; subtitle::String ="", color::String="#000000",font_size::Int=25)::HypertextLiteral.Result
 	style = "color:$(color);font-size:$(font_size)px"
 	foot_style = "color:$(color);font-size: 18px; font-variant: small-caps; text-align:right"
 	itlist = []
@@ -30,36 +30,63 @@ function make_list_slide(title::String, list::Vector, foot::String; color::Strin
 			push!(itlist,it[1]) 
 		end	
 	end	
-    @htl """
-        <h1 style="text-align:center">$(title)</h1>
-        <div style="padding:25px;text-align:left">
-		<ul>$(itlist)</ul>
-		<hr style="background-color:#000000;border-width: 1px">
-        <p style=$(foot_style)>$(foot)</p>
-        </div>
-    """
+    htltitle = @htl """<h1 style="text-align:center">$(title)</h1> """
+	htlsubtitle = @htl """<h3 style="text-align:center">$(subtitle)</h1>"""
+	htllist =	@htl """
+			<div style="padding:25px;text-align:left">
+			<ul>$(itlist)</ul>
+			<hr style="background-color:#000000;border-width: 1px">
+        	<p style=$(foot_style)>$(foot)</p>
+        	</div>
+    	"""
+	if !isempty(subtitle)
+		return @htl """ $(htltitle) $(htlsubtitle) $(htllist) """
+	else
+		return @htl """$(htltitle) $(htllist)"""
+	end	
 end;
+
+# ╔═╡ d08eb377-e2e3-4c4b-bbdd-6e0641e199ea
+make_list_slide(
+	"Sonification of ODEs in Real Time",
+	[
+		"Intuitive access to Dynamic Systems for the uninitiated.",
+		"Interactively explore unfoldings of normal forms.", 
+		"New tools for live coding.",
+		"Sound Synthesis."
+	],
+	"este es el pie 3";
+	font_size=22
+)
 
 # ╔═╡ 0e9e7e02-5fa1-41b1-812a-e169b130e01f
 make_list_slide(
-	"our motivation",
+	"Sound Synthesis and ODEs",
 	[
-		[@htl"""It uses <em><span style="color: #1010bb"><u>DifferentialEquations.jl</span></u></em> and <em><span style="color: #bb1010">libportaudio_jll.jl</span></em>"""],
-		[@htl"""It works for ODEs and SDEs and it works in <img src= "https://i.imgur.com/Zbhkscf.png" width="80" alt="Julia">"""],
+		"Real-time simulation with low resources.", 
+		"Parameter control in performance situation.",
+		"Exploration of extended techniques in instrumentation",
+		"Adjusting the model with instrumental practice",
+		"Creation of new instruments",
+		"Embedded systems",
+		"Insight into the underlying mechanisms."
 	],
-	"este es el pie 3", font_size=20
+	"este es el pie 3";
+	subtitle = "Advantages over other methods",
+	font_size=20
 )
 
 # ╔═╡ fb71be2e-cc30-47a4-922c-67f5c85d7eea
 make_list_slide(
 	"Sound Synthesis and ODEs",
 	[
-		[@htl"""It uses <em><span style="color: #1010bb"><u>DifferentialEquations.jl</span></u></em> and <em><span style="color: #bb1010">libportaudio_jll.jl</span></em>"""],
 		[@htl"""It works for ODEs and SDEs and it works in <img src= "https://i.imgur.com/o3lcAuX.png" width="80" alt="Supercollider">"""],
 		[@htl"""It works for ODEs and SDEs and it works in <img src= "https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_Max_8_software.jpg" width="80" alt="MAX">"""],
 		[@htl"""Let's do that in <img src= "https://i.imgur.com/Zbhkscf.png" width="120" alt="Julia">"""],
 	],
-	"este es el pie 3", font_size=20
+	"este es el pie 3";
+	subtitle = "Previous implementations",
+	font_size=20
 )
 
 # ╔═╡ 56940c0b-eee4-48cc-9603-7fca60493dc0
@@ -86,6 +113,16 @@ make_list_slide(
 	],
 	"este es el pie 3", font_size=20
 )
+
+# ╔═╡ 08bcd0b9-2ef8-4b5a-81c8-7db378c053a9
+
+
+# ╔═╡ 60053bef-ef82-4351-a485-a3df14042a4b
+begin
+	mys2 = @htl """ es un "canchero" """
+	mys1 = """pepe """
+	@htl """$(mys1) $(mys2)"""
+end	
 
 # ╔═╡ 00f2f279-0f48-427c-88c9-b33f786dde79
 function make_title(title::String, subtitle::String, author::String, affiliation::String)::HypertextLiteral.Result
@@ -154,9 +191,6 @@ function make_image_slide(title::String, image_url::String, caption::String, foo
         </div>
     """
 end;
-
-# ╔═╡ 1f69f772-18b3-4483-a830-273f43bd9030
- make_image_slide("", "https://i.imgur.com/Zbhkscf.png", "", ""; width=300, alt_text="a")
 
 # ╔═╡ 62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 html"""
@@ -1286,15 +1320,17 @@ version = "1.4.1+1"
 # ╟─7b9dba35-4de7-4d24-8182-a37cf9f654da
 # ╟─540fdaf5-b72a-44b1-a15b-059782d7ad65
 # ╟─d1bd1cc1-fc46-4971-a913-3b85d9ad447e
-# ╟─0e9e7e02-5fa1-41b1-812a-e169b130e01f
-# ╟─fb71be2e-cc30-47a4-922c-67f5c85d7eea
+# ╠═d08eb377-e2e3-4c4b-bbdd-6e0641e199ea
+# ╠═0e9e7e02-5fa1-41b1-812a-e169b130e01f
+# ╠═fb71be2e-cc30-47a4-922c-67f5c85d7eea
 # ╟─56940c0b-eee4-48cc-9603-7fca60493dc0
-# ╟─b021e1d7-9d84-4e56-8dae-de96c4495b70
+# ╠═b021e1d7-9d84-4e56-8dae-de96c4495b70
 # ╟─ffac0a94-454c-4714-8514-04c106869969
 # ╠═242f4ce1-a7ce-434c-bdf1-67b635f27b91
+# ╠═08bcd0b9-2ef8-4b5a-81c8-7db378c053a9
+# ╠═60053bef-ef82-4351-a485-a3df14042a4b
 # ╠═00f2f279-0f48-427c-88c9-b33f786dde79
 # ╠═5466df84-ee93-4382-bbb9-503d466b993e
-# ╠═1f69f772-18b3-4483-a830-273f43bd9030
 # ╠═ebd4952b-26b4-407d-bdb4-40343dcb98a3
 # ╠═62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 # ╠═1adbf6e0-2dd2-11ef-1ef5-b91dcae29094

@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.42
+# v0.19.43
 
 #> custom_attrs = ["hide-enabled"]
 
@@ -12,10 +12,22 @@ using PlutoUI, Plots, HypertextLiteral
 # ╔═╡ 7b9dba35-4de7-4d24-8182-a37cf9f654da
 html"<button onclick='present()'>present</button>"
 
+# ╔═╡ f5ed315f-b312-439c-bb71-5f1e0f1300a6
+@htl"""
+	<h2 style="text-align:center"></h2>
+    <div style="text-align:center">
+    <p style="font-weight:bold; font-size: 35px; margin: 0px">
+	... Let's do that in <img src= "https://i.imgur.com/Zbhkscf.png" width="120" alt="Julia"> </p>
+	</div>
+"""
+
 # ╔═╡ ffac0a94-454c-4714-8514-04c106869969
  @htl """
  	<h1 style="text-align:center"></h1>
  """
+
+# ╔═╡ 06e00e39-0ec1-4354-8cb2-007f6028d362
+nslides=10
 
 # ╔═╡ 242f4ce1-a7ce-434c-bdf1-67b635f27b91
 function make_list_slide(title::String, list::Vector, foot::String; subtitle::String ="", color::String="#000000",font_size::Int=25)::HypertextLiteral.Result
@@ -29,8 +41,8 @@ function make_list_slide(title::String, list::Vector, foot::String; subtitle::St
 		else
 			push!(itlist,it[1]) 
 		end	
-	end	
-    htltitle = @htl """<h1 style="text-align:center">$(title)</h1> """
+	end
+    htltitle = @htl """<h1 style="text-align:center">$(title)</h1> """	
 	htlsubtitle = @htl """<h3 style="text-align:center">$(subtitle)</h1>"""
 	htllist =	@htl """
 			<div style="padding:25px;text-align:left">
@@ -46,16 +58,31 @@ function make_list_slide(title::String, list::Vector, foot::String; subtitle::St
 	end	
 end;
 
+# ╔═╡ ab94cd68-7484-41ef-a825-23722026fbe3
+make_list_slide(
+	"Plan of the Talk",
+	[
+		[@htl"""<span style="color: #ff0000">Who we are ((LAPSo))</span>"""],
+		[@htl"""<span style="color: #ff0000">Our motivation</span>"""],
+		[@htl"""<span style="color: #ff0000">Sonification of ODEs in Real Time</span>"""],
+		[@htl"""<span style="color: #ff0000">Sound Synthesis and ODEs</span>"""],
+		[@htl"""<span style="color: #ff0000">RealTimeAudioDiffEq.jl</span>"""],
+		[@htl"""<span style="color: #0000ff"><strong>Example 1:</strong> Forced Nonlinear Oscillator</span>"""],
+		[@htl"""<span style="color: #0000ff"><strong>Example 2:</strong> Bogdanov Takens Bifurcation with Noise (SDE)</span>"""],
+		[@htl"""<span style="color: #0000ff"><strong>Example 3:</strong> Saxophone Model</span>"""],
+	],
+	"1/$(nslides)",color="#00000F")
+
 # ╔═╡ d08eb377-e2e3-4c4b-bbdd-6e0641e199ea
 make_list_slide(
 	"Sonification of ODEs in Real Time",
 	[
-		"Intuitive access to Dynamic Systems for the uninitiated.",
-		"Interactively explore unfoldings of normal forms.", 
-		"New tools for live coding.",
-		"Sound Synthesis."
+		"Intuitive access to Dynamical Systems for the uninitiated.",
+		"Interactively explore bifurcations and parameter space.", 
+		"Give insight on simple dynamical models of musical instruments.",
+		"New tools for sound synthesis and live coding.",
 	],
-	"este es el pie 3";
+	"5/$(nslides)";
 	font_size=22
 )
 
@@ -71,7 +98,7 @@ make_list_slide(
 		"Embedded systems",
 		"Insight into the underlying mechanisms."
 	],
-	"este es el pie 3";
+	"7/$(nslides)";
 	subtitle = "Advantages over other methods",
 	font_size=20
 )
@@ -80,23 +107,23 @@ make_list_slide(
 make_list_slide(
 	"Sound Synthesis and ODEs",
 	[
-		[@htl"""It works for ODEs and SDEs and it works in <img src= "https://i.imgur.com/o3lcAuX.png" width="80" alt="Supercollider">"""],
-		[@htl"""It works for ODEs and SDEs and it works in <img src= "https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_Max_8_software.jpg" width="80" alt="MAX">"""],
-		[@htl"""Let's do that in <img src= "https://i.imgur.com/Zbhkscf.png" width="120" alt="Julia">"""],
+		[@htl""" <img src="https://i.imgur.com/o3lcAuX.png" width="80" alt="Supercollider"> <strong>Supercollider:</strong> ODE integration using one-sample-feedback library (miSCellaneous_lib)   <em>https://github.com/meguia/ODESC</em>"""],
+		[@htl"""<img src= "https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_Max_8_software.jpg" width="80" alt="MAX"><strong>MAX/MSP:</strong> Framework """],
+		
 	],
-	"este es el pie 3";
+	"8/$(nslides)";
 	subtitle = "Previous implementations",
 	font_size=20
 )
 
 # ╔═╡ 56940c0b-eee4-48cc-9603-7fca60493dc0
 make_list_slide(
-	"Differential Equations",
+	""" Real Time Audio Differential Equations""" ,
 	[
+		[@htl"""Take advantage of the algorithms of <em><span style="color: #1010bb"><u>DifferentialEquations.jl</span></u> </em> <img src= "https://docs.sciml.ai/DiffEqDocs/stable/assets/logo.png" width="80" alt="DifferentialEquations">"""],
 		[@htl"""It uses <em><span style="color: #1010bb"><u>DifferentialEquations.jl</span></u></em> and <em><span style="color: #bb1010">libportaudio_jll.jl</span></em>"""],
-		[@htl"""It works for ODEs and SDEs and it works in <img src= "https://docs.sciml.ai/DiffEqDocs/stable/assets/logo.png" width="80" alt="Supercollider">"""],
 	],
-	"este es el pie 3", font_size=20
+	"9/$(nslides)", font_size=20
 )
 
 # ╔═╡ b021e1d7-9d84-4e56-8dae-de96c4495b70
@@ -111,37 +138,7 @@ make_list_slide(
 		[@htl"""The <span style="color: #bb1010">Callback</span> asynchronously invokes <span style="color: #1010bb"><em>solve()</em></span> to refill the audio buffer"""],
 		[@htl"""The parameters of the <span style="color: #1010bb">DEProblem</span>, the time-scaling and the mapping of the channels can be modified on the fly"""]
 	],
-	"este es el pie 3", font_size=20
-)
-
-# ╔═╡ 08bcd0b9-2ef8-4b5a-81c8-7db378c053a9
-
-
-# ╔═╡ 60053bef-ef82-4351-a485-a3df14042a4b
-begin
-	mys2 = @htl """ es un "canchero" """
-	mys1 = """pepe """
-	@htl """$(mys1) $(mys2)"""
-end	
-
-# ╔═╡ 00f2f279-0f48-427c-88c9-b33f786dde79
-function make_title(title::String, subtitle::String, author::String, affiliation::String)::HypertextLiteral.Result
-    @htl """
-        <h1 style="text-align:center">$(title)</h1>
-        <div style="text-align:center">
-        <p style="font-weight:bold; font-size: 35px; font-variant: small-caps; margin: 0px">$(subtitle)</p>
-        <p style="font-size: 30px; font-variant: small-caps; margin: 0px">$(author)</p>
-        <p style="font-size: 20px;">$(affiliation)</p>
-        </div>
-    """
-end;
-
-# ╔═╡ 540fdaf5-b72a-44b1-a15b-059782d7ad65
-make_title(
-	"JuliaCon 2024",
-	"Real Time ODEs for Sound Synthesis and Parameter Exploration",
-	"Manuel Eguia, Antonio Ortega Brook, Dario Ruiz",
-	"((LAPSo)) Laboratorio de Acustica y Percepcion Sonora"
+	"10/$(nslides)", font_size=20
 )
 
 # ╔═╡ 5466df84-ee93-4382-bbb9-503d466b993e
@@ -150,7 +147,7 @@ function make_text_slide(title::String, paragraphs::Vector, foot::String; color:
 	foot_style = "color:$(color);font-size: 18px; font-variant: small-caps; text-align:right"
 	itlist = []
 	for it in paragraphs
-		push!(itlist,@htl("<li style=$(style)>"))	
+		push!(itlist,@htl("<p style=$(style)>"))	
 		if typeof(it) == String
 			push!(itlist,it) 
 		else
@@ -160,7 +157,7 @@ function make_text_slide(title::String, paragraphs::Vector, foot::String; color:
     @htl """
         <h1 style="text-align:center">$(title)</h1>
         <div style="padding:25px;text-align:left">
-		<ul>$(itlist)</ul>
+		$(itlist)
 		<hr style="background-color:#000000;border-width: 1px">
         <p style=$(foot_style)>$(foot)</p>
         </div>
@@ -171,11 +168,46 @@ end;
 make_text_slide(
 	"about us : ((LAPSo))",
 	[
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		[@htl"""Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo <span style="color: #ff0000">consequat</span>. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."""], 
-		"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+		[@htl"""<img src="https://i.imgur.com/ZYYKPiQ.png" width="350" alt="Authors"> <br> Authors """],
+		[@htl"""<img src="https://i.imgur.com/YGz6uSU.png" width="250" alt="Bandoneon"> <br> Martin Proscia Hybrid sonorities JNMR <span style="color: #ff0000">multiphonics</span>."""], 
+		[@htl"""<img src="https://i.imgur.com/YGz6uSU.png" width="250" alt="Bandoneon"> <br> Bandoneon 2.0. Juan Ramos et al. CMJ """],
 	],
-	"Lapso 2",color="#00000F")
+	"2/$(nslides)",color="#00000F")
+
+# ╔═╡ 3c0a1ab5-a80d-402d-9ef0-ab84d2ce23e7
+make_text_slide(
+	"Background and Motivation",
+	[
+		"Applied Nonlinear Dynamics",
+		[@htl"""<img src="https://i.imgur.com/JcDHhxc.jpg" width="400" alt="Bandoneon"> <br>Teaching, Workshops"""], 
+		"Pedagogical + Model Exploration + Sound Synthesis",
+	],
+	"4/$(nslides)",color="#00000F")
+
+# ╔═╡ 00f2f279-0f48-427c-88c9-b33f786dde79
+function make_title(title::String, author::String, affiliation::String, address::String; heading::String="", width::Int=100, foot::String="")::HypertextLiteral.Result
+    @htl """
+        <h1 style="text-align:center"><img src= $(heading) width="$(width)" alt="heading"> <br> $(title)</h1>
+        <div style="text-align:center">
+        <p style="font-size: 25px; font-variant: small-caps; margin: 0px">$(author)</p>
+		<p style="font-size: 18px;">$(affiliation)</p>
+		<p style="font-size: 18px;">$(address)</p>
+        </div>
+		<div style="padding:25px;text-align:center">
+		<img src= $(foot) width="400" alt="foot">
+		</div>
+    """
+end;
+
+# ╔═╡ 540fdaf5-b72a-44b1-a15b-059782d7ad65
+make_title(
+	"Real Time ODEs for Sound Synthesis and Parameter Exploration",
+	"Manuel Eguia, Antonio Ortega Brook, Dario Ruiz",
+	"((LAPSo)) Laboratorio de Acustica y Percepcion Sonora",
+	"Universidad Nacional de Quilmes, Buenos Aires, Argentina",
+	heading = "https://i.imgur.com/XcuT26t.png", width=150,
+	foot = "https://i.imgur.com/IxMFpny.png"
+)
 
 # ╔═╡ ebd4952b-26b4-407d-bdb4-40343dcb98a3
 function make_image_slide(title::String, image_url::String, caption::String, foot::String; color::String="#000000",font_size::Int=25,alt_text::String="",width::Int=1000)::HypertextLiteral.Result
@@ -191,6 +223,20 @@ function make_image_slide(title::String, image_url::String, caption::String, foo
         </div>
     """
 end;
+
+# ╔═╡ 2ba77019-8a1c-4f98-a399-d48e421ae717
+make_image_slide(
+	"about us : ((LAPSo))",
+	"https://i.imgur.com/msG5MFu.png",
+	"Generalized Lutherie ",
+	"3/$(nslides)";color="#00000F", width=700)
+
+# ╔═╡ cde98e65-936b-43e1-9533-d6314c6a1cfb
+make_image_slide(
+	"about us : ((LAPSo))",
+	"https://i.imgur.com/MNyXnAo.png",
+	"Generalized Lutherie ",
+	"3/$(nslides)",color="#00000F", width=700)
 
 # ╔═╡ 62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 html"""
@@ -1319,18 +1365,22 @@ version = "1.4.1+1"
 # ╔═╡ Cell order:
 # ╟─7b9dba35-4de7-4d24-8182-a37cf9f654da
 # ╟─540fdaf5-b72a-44b1-a15b-059782d7ad65
-# ╟─d1bd1cc1-fc46-4971-a913-3b85d9ad447e
-# ╠═d08eb377-e2e3-4c4b-bbdd-6e0641e199ea
-# ╠═0e9e7e02-5fa1-41b1-812a-e169b130e01f
+# ╠═ab94cd68-7484-41ef-a825-23722026fbe3
+# ╠═d1bd1cc1-fc46-4971-a913-3b85d9ad447e
+# ╟─2ba77019-8a1c-4f98-a399-d48e421ae717
+# ╟─cde98e65-936b-43e1-9533-d6314c6a1cfb
+# ╠═3c0a1ab5-a80d-402d-9ef0-ab84d2ce23e7
+# ╟─d08eb377-e2e3-4c4b-bbdd-6e0641e199ea
+# ╟─0e9e7e02-5fa1-41b1-812a-e169b130e01f
 # ╠═fb71be2e-cc30-47a4-922c-67f5c85d7eea
+# ╟─f5ed315f-b312-439c-bb71-5f1e0f1300a6
 # ╟─56940c0b-eee4-48cc-9603-7fca60493dc0
-# ╠═b021e1d7-9d84-4e56-8dae-de96c4495b70
+# ╟─b021e1d7-9d84-4e56-8dae-de96c4495b70
 # ╟─ffac0a94-454c-4714-8514-04c106869969
+# ╟─06e00e39-0ec1-4354-8cb2-007f6028d362
 # ╠═242f4ce1-a7ce-434c-bdf1-67b635f27b91
-# ╠═08bcd0b9-2ef8-4b5a-81c8-7db378c053a9
-# ╠═60053bef-ef82-4351-a485-a3df14042a4b
-# ╠═00f2f279-0f48-427c-88c9-b33f786dde79
 # ╠═5466df84-ee93-4382-bbb9-503d466b993e
+# ╠═00f2f279-0f48-427c-88c9-b33f786dde79
 # ╠═ebd4952b-26b4-407d-bdb4-40343dcb98a3
 # ╠═62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
 # ╠═1adbf6e0-2dd2-11ef-1ef5-b91dcae29094

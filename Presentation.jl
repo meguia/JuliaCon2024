@@ -14,10 +14,19 @@ html"<button onclick='present()'>present</button>"
 
 # ╔═╡ f5ed315f-b312-439c-bb71-5f1e0f1300a6
 @htl"""
-	<h2 style="text-align:center"></h2>
+	<h1 style="text-align:center"></h1>
     <div style="text-align:center">
     <p style="font-weight:bold; font-size: 35px; margin: 0px">
 	... Let's do that in <img src= "https://i.imgur.com/Zbhkscf.png" width="120" alt="Julia"> </p>
+	</div>
+"""
+
+# ╔═╡ c4985161-861d-49e2-9d0e-6fcb752ae047
+@htl"""
+	<h1 style="text-align:center"></h1>
+    <div style="text-align:center">
+    <p style="font-weight:bold; font-size: 35px; margin: 0px">
+	Now in the <img src= "https://i.imgur.com/Zbhkscf.png" width="80" alt="Julia"> <strong>REPL</strong></p>
 	</div>
 """
 
@@ -27,7 +36,7 @@ html"<button onclick='present()'>present</button>"
  """
 
 # ╔═╡ 06e00e39-0ec1-4354-8cb2-007f6028d362
-nslides=10
+nslides=9;
 
 # ╔═╡ 242f4ce1-a7ce-434c-bdf1-67b635f27b91
 function make_list_slide(title::String, list::Vector, foot::String; subtitle::String ="", color::String="#000000",font_size::Int=25)::HypertextLiteral.Result
@@ -98,21 +107,8 @@ make_list_slide(
 		"Embedded systems",
 		"Insight into the underlying mechanisms."
 	],
-	"7/$(nslides)";
+	"6/$(nslides)";
 	subtitle = "Advantages over other methods",
-	font_size=20
-)
-
-# ╔═╡ fb71be2e-cc30-47a4-922c-67f5c85d7eea
-make_list_slide(
-	"Sound Synthesis and ODEs",
-	[
-		[@htl""" <img src="https://i.imgur.com/o3lcAuX.png" width="80" alt="Supercollider"> <strong>Supercollider:</strong> ODE integration using one-sample-feedback library (miSCellaneous_lib)   <em>https://github.com/meguia/ODESC</em>"""],
-		[@htl"""<img src= "https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_Max_8_software.jpg" width="80" alt="MAX"><strong>MAX/MSP:</strong> Framework """],
-		
-	],
-	"8/$(nslides)";
-	subtitle = "Previous implementations",
 	font_size=20
 )
 
@@ -120,10 +116,10 @@ make_list_slide(
 make_list_slide(
 	""" Real Time Audio Differential Equations""" ,
 	[
-		[@htl"""Take advantage of the algorithms of <em><span style="color: #1010bb"><u>DifferentialEquations.jl</span></u> </em> <img src= "https://docs.sciml.ai/DiffEqDocs/stable/assets/logo.png" width="80" alt="DifferentialEquations">"""],
-		[@htl"""It uses <em><span style="color: #1010bb"><u>DifferentialEquations.jl</span></u></em> and <em><span style="color: #bb1010">libportaudio_jll.jl</span></em>"""],
+		[@htl""" <img src= "https://docs.sciml.ai/DiffEqDocs/stable/assets/logo.png" width="80" alt="DifferentialEquations"> &nbsp&nbsp&nbspTake advantage of the algorithms of <em><span style="color: #1010bb"><u>DifferentialEquations.jl</span></u> </em>"""],
+		[@htl"""<img src= "https://i.imgur.com/3Ti7l6x.png" width="80" alt="PortAudio">&nbsp&nbsp&nbspUse <span style="color: #bb1010">PortAudio</span></em> to to call the integrators of <span style="color: #1010bb">DifferentialEquations</span> in a dedicated audio thread """],
 	],
-	"9/$(nslides)", font_size=20
+	"8/$(nslides)", font_size=20
 )
 
 # ╔═╡ b021e1d7-9d84-4e56-8dae-de96c4495b70
@@ -138,12 +134,12 @@ make_list_slide(
 		[@htl"""The <span style="color: #bb1010">Callback</span> asynchronously invokes <span style="color: #1010bb"><em>solve()</em></span> to refill the audio buffer"""],
 		[@htl"""The parameters of the <span style="color: #1010bb">DEProblem</span>, the time-scaling and the mapping of the channels can be modified on the fly"""]
 	],
-	"10/$(nslides)", font_size=20
+	"9/$(nslides)", font_size=20
 )
 
 # ╔═╡ 5466df84-ee93-4382-bbb9-503d466b993e
-function make_text_slide(title::String, paragraphs::Vector, foot::String; color::String="#000000",font_size::Int=25)::HypertextLiteral.Result
-	style = "color:$(color);font-size:$(font_size)px"
+function make_text_slide(title::String, paragraphs::Vector, foot::String; subtitle::String ="", color::String="#000000",font_size::Int=25,align::String="left")::HypertextLiteral.Result
+	style = "color:$(color);font-size:$(font_size)px;text-align:$(align)"
 	foot_style = "color:$(color);font-size: 18px; font-variant: small-caps; text-align:right"
 	itlist = []
 	for it in paragraphs
@@ -154,35 +150,54 @@ function make_text_slide(title::String, paragraphs::Vector, foot::String; color:
 			push!(itlist,it[1]) 
 		end	
 	end	
-    @htl """
-        <h1 style="text-align:center">$(title)</h1>
-        <div style="padding:25px;text-align:left">
-		$(itlist)
-		<hr style="background-color:#000000;border-width: 1px">
-        <p style=$(foot_style)>$(foot)</p>
-        </div>
-    """
+	htltitle = @htl """<h1 style="text-align:center">$(title)</h1> """	
+	htlsubtitle = @htl """<h3 style="text-align:center">$(subtitle)</h1>"""
+    htllist = @htl """
+	        <div style="padding:25px;text-align:left">
+			$(itlist)
+			<hr style="background-color:#000000;border-width: 1px">
+	        <p style=$(foot_style)>$(foot)</p>
+	        </div>
+	    """
+	if !isempty(subtitle)
+		return @htl """ $(htltitle) $(htlsubtitle) $(htllist) """
+	else
+		return @htl """$(htltitle) $(htllist)"""
+	end	
 end;
 
 # ╔═╡ d1bd1cc1-fc46-4971-a913-3b85d9ad447e
 make_text_slide(
 	"about us : ((LAPSo))",
 	[
-		[@htl"""<img src="https://i.imgur.com/ZYYKPiQ.png" width="350" alt="Authors"> <br> Authors """],
-		[@htl"""<img src="https://i.imgur.com/YGz6uSU.png" width="250" alt="Bandoneon"> <br> Martin Proscia Hybrid sonorities JNMR <span style="color: #ff0000">multiphonics</span>."""], 
-		[@htl"""<img src="https://i.imgur.com/YGz6uSU.png" width="250" alt="Bandoneon"> <br> Bandoneon 2.0. Juan Ramos et al. CMJ """],
+		[@htl"""<img src="https://i.imgur.com/ZYYKPiQ.png" width="300" alt="Authors"> <br> MCE AOB DR, Dynamical models of wind musical instruments """],
+		[@htl"""<img src="https://i.imgur.com/jiLCT2C.png" width="250" alt="Saxofon"> <br> Martin Proscia. Musical and cognitive aspects of multiphonics <br> <span style="color: #999999">Riera et al.  (2014) Journal of New Music Research, 43(2), 202–213 </span>"""], 
+		[@htl"""<img src="https://i.imgur.com/YGz6uSU.png" width="250" alt="Bandoneon"> <br> Bandoneon 2.0. <br> <span style="color: #999999"> Ramos et al. (2022) Computer Music Journal 2022; 46 (1-2): 40–57 </span>"""],
 	],
-	"2/$(nslides)",color="#00000F")
+	"2/$(nslides)",font_size=18,color="#00000F",align="center")
 
 # ╔═╡ 3c0a1ab5-a80d-402d-9ef0-ab84d2ce23e7
 make_text_slide(
 	"Background and Motivation",
 	[
-		"Applied Nonlinear Dynamics",
-		[@htl"""<img src="https://i.imgur.com/JcDHhxc.jpg" width="400" alt="Bandoneon"> <br>Teaching, Workshops"""], 
+		"Applied Nonlinear Dynamics: voice models",
+		[@htl"""<img src="https://i.imgur.com/JcDHhxc.jpg" width="400" alt="Bandoneon"> <br>Teaching, Workshops for non-mathematicians"""], 
 		"Pedagogical + Model Exploration + Sound Synthesis",
 	],
 	"4/$(nslides)",color="#00000F")
+
+# ╔═╡ fb71be2e-cc30-47a4-922c-67f5c85d7eea
+make_text_slide(
+	"Sound Synthesis and ODEs",
+	[
+		[@htl""" <img src="https://i.imgur.com/o3lcAuX.png" width="80" alt="Supercollider"> <strong>Supercollider:</strong> ODE integration using one-sample-feedback library (miSCellaneous_lib)   <em>https://github.com/meguia/ODESC</em>"""],
+		[@htl"""<img src= "https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_Max_8_software.jpg" width="80" alt="MAX"><strong>MAX/MSP:</strong> ODE integration using custom Max package written in C"""],
+		[@htl"""<img src= "https://i.imgur.com/Y30ZFDt.png" width="300" alt="MAX"> """],
+	],
+	"7/$(nslides)";
+	subtitle = "Other implementations",
+	font_size=20, align="center"
+)
 
 # ╔═╡ 00f2f279-0f48-427c-88c9-b33f786dde79
 function make_title(title::String, author::String, affiliation::String, address::String; heading::String="", width::Int=100, foot::String="")::HypertextLiteral.Result
@@ -1365,25 +1380,26 @@ version = "1.4.1+1"
 # ╔═╡ Cell order:
 # ╟─7b9dba35-4de7-4d24-8182-a37cf9f654da
 # ╟─540fdaf5-b72a-44b1-a15b-059782d7ad65
-# ╠═ab94cd68-7484-41ef-a825-23722026fbe3
-# ╠═d1bd1cc1-fc46-4971-a913-3b85d9ad447e
+# ╟─ab94cd68-7484-41ef-a825-23722026fbe3
+# ╟─d1bd1cc1-fc46-4971-a913-3b85d9ad447e
 # ╟─2ba77019-8a1c-4f98-a399-d48e421ae717
 # ╟─cde98e65-936b-43e1-9533-d6314c6a1cfb
-# ╠═3c0a1ab5-a80d-402d-9ef0-ab84d2ce23e7
+# ╟─3c0a1ab5-a80d-402d-9ef0-ab84d2ce23e7
 # ╟─d08eb377-e2e3-4c4b-bbdd-6e0641e199ea
 # ╟─0e9e7e02-5fa1-41b1-812a-e169b130e01f
-# ╠═fb71be2e-cc30-47a4-922c-67f5c85d7eea
+# ╟─fb71be2e-cc30-47a4-922c-67f5c85d7eea
 # ╟─f5ed315f-b312-439c-bb71-5f1e0f1300a6
 # ╟─56940c0b-eee4-48cc-9603-7fca60493dc0
 # ╟─b021e1d7-9d84-4e56-8dae-de96c4495b70
+# ╟─c4985161-861d-49e2-9d0e-6fcb752ae047
 # ╟─ffac0a94-454c-4714-8514-04c106869969
 # ╟─06e00e39-0ec1-4354-8cb2-007f6028d362
-# ╠═242f4ce1-a7ce-434c-bdf1-67b635f27b91
-# ╠═5466df84-ee93-4382-bbb9-503d466b993e
-# ╠═00f2f279-0f48-427c-88c9-b33f786dde79
-# ╠═ebd4952b-26b4-407d-bdb4-40343dcb98a3
-# ╠═62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
-# ╠═1adbf6e0-2dd2-11ef-1ef5-b91dcae29094
-# ╠═05a95487-175f-4048-9011-a750630b4b9e
+# ╟─242f4ce1-a7ce-434c-bdf1-67b635f27b91
+# ╟─5466df84-ee93-4382-bbb9-503d466b993e
+# ╟─00f2f279-0f48-427c-88c9-b33f786dde79
+# ╟─ebd4952b-26b4-407d-bdb4-40343dcb98a3
+# ╟─62d4d7f2-555c-48e5-8cbf-0a72d83afeb3
+# ╟─1adbf6e0-2dd2-11ef-1ef5-b91dcae29094
+# ╟─05a95487-175f-4048-9011-a750630b4b9e
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

@@ -17,7 +17,9 @@ html"<button onclick='present()'>present</button>"
 	<h1 style="text-align:center"></h1>
     <div style="text-align:center">
     <p style="font-weight:bold; font-size: 35px; margin: 0px">
-	... Let's do that in <img src= "https://i.imgur.com/Zbhkscf.png" width="120" alt="Julia"> </p>
+	... Let's do that in <img src= "https://i.imgur.com/Zbhkscf.png" width="120" alt="Julia">  </p> 
+	<br>
+	<p style="font-size: 30px; margin: 0px"> ... using <img src= "https://docs.sciml.ai/DiffEqDocs/stable/assets/logo.png" width="40" alt="DifferentialEquations"> DifferentialEquations </p>
 	</div>
 """
 
@@ -31,6 +33,25 @@ html"<button onclick='present()'>present</button>"
 """
 
 # ╔═╡ ffac0a94-454c-4714-8514-04c106869969
+ @htl """
+ 	<h1 style="text-align:center"></h1>
+ """
+
+# ╔═╡ 051946f9-83ea-45c9-bc6f-7e2e9aa83500
+ @htl """
+ 	<h1 style="text-align:center">Thank You!</h1>
+	<p style="text-align:left;font-size: 25px">Resources</p>
+ 	<div style="padding:25px;text-align:left;font-size: 20px">
+	<ul>
+ 	<li> <u><em> https://github.com/antonioortegabrook/RealTimeAudioDiffEq.jl </em>
+ 	<li> <u><em> https://github.com/meguia/RTADiffEqExamples </em>
+ 	<li> <u><em> https://github.com/meguia/JuliaCon2024 </em>
+ 	</ul>
+ 	</div>
+  
+ """
+
+# ╔═╡ 98041950-c551-4a99-9f49-7ef818d6adf6
  @htl """
  	<h1 style="text-align:center"></h1>
  """
@@ -190,9 +211,9 @@ make_text_slide(
 make_text_slide(
 	"Sound Synthesis and ODEs",
 	[
-		[@htl""" <img src="https://i.imgur.com/o3lcAuX.png" width="80" alt="Supercollider"> <strong>Supercollider:</strong> ODE integration using one-sample-feedback library (miSCellaneous_lib)   <em>https://github.com/meguia/ODESC</em>"""],
-		[@htl"""<img src= "https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_Max_8_software.jpg" width="80" alt="MAX"><strong>MAX/MSP:</strong> ODE integration using custom Max package written in C"""],
-		[@htl"""<img src= "https://i.imgur.com/Y30ZFDt.png" width="300" alt="MAX"> """],
+		[@htl""" <img src="https://i.imgur.com/o3lcAuX.png" width="80" alt="Supercollider"> <strong> &nbsp&nbsp Supercollider:</strong> ODE integration using one-sample-feedback library (miSCellaneous_lib)   <em>https://github.com/meguia/ODESC</em>"""],
+		[@htl"""<img src= "https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_Max_8_software.jpg" width="80" alt="Max"><strong>&nbsp&nbsp&nbsp&nbspMax/MSP:</strong> ODE integration using custom Max package written in C"""],
+		[@htl"""<img src= "https://i.imgur.com/Y30ZFDt.png" width="250" alt="MAX"> """],
 	],
 	"7/$(nslides)";
 	subtitle = "Other implementations",
@@ -1393,6 +1414,8 @@ version = "1.4.1+1"
 # ╟─b021e1d7-9d84-4e56-8dae-de96c4495b70
 # ╟─c4985161-861d-49e2-9d0e-6fcb752ae047
 # ╟─ffac0a94-454c-4714-8514-04c106869969
+# ╟─051946f9-83ea-45c9-bc6f-7e2e9aa83500
+# ╟─98041950-c551-4a99-9f49-7ef818d6adf6
 # ╟─06e00e39-0ec1-4354-8cb2-007f6028d362
 # ╟─242f4ce1-a7ce-434c-bdf1-67b635f27b91
 # ╟─5466df84-ee93-4382-bbb9-503d466b993e

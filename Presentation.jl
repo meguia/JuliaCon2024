@@ -191,11 +191,11 @@ end;
 make_text_slide(
 	"about us : ((LAPSo))",
 	[
-		[@htl"""<img src="https://i.imgur.com/ZYYKPiQ.png" width="300" alt="Authors"> <br> MCE AOB DR, Dynamical models of wind musical instruments """],
-		[@htl"""<img src="https://i.imgur.com/jiLCT2C.png" width="250" alt="Saxofon"> <br> Martin Proscia. Musical and cognitive aspects of multiphonics <br> <span style="color: #999999">Riera et al.  (2014) Journal of New Music Research, 43(2), 202–213 </span>"""], 
+		[@htl"""<img src="https://i.imgur.com/ZYYKPiQ.png" width="250" alt="Authors"> <br> MCE AOB DR, Dynamical models of wind musical instruments """],
+		[@htl"""<img src="https://i.imgur.com/jiLCT2C.png" width="230" alt="Saxofon"> <br> Martin Proscia. Musical and cognitive aspects of multiphonics <br> <span style="color: #999999">Riera et al.  (2014) Journal of New Music Research, 43(2), 202–213 </span>"""], 
 		[@htl"""<img src="https://i.imgur.com/YGz6uSU.png" width="250" alt="Bandoneon"> <br> Bandoneon 2.0. <br> <span style="color: #999999"> Ramos et al. (2022) Computer Music Journal 2022; 46 (1-2): 40–57 </span>"""],
 	],
-	"2/$(nslides)",font_size=18,color="#00000F",align="center")
+	"2/$(nslides)",font_size=16,color="#00000F",align="center")
 
 # ╔═╡ 3c0a1ab5-a80d-402d-9ef0-ab84d2ce23e7
 make_text_slide(
@@ -211,9 +211,9 @@ make_text_slide(
 make_text_slide(
 	"Sound Synthesis and ODEs",
 	[
-		[@htl""" <img src="https://i.imgur.com/o3lcAuX.png" width="80" alt="Supercollider"> <strong> &nbsp&nbsp Supercollider:</strong> ODE integration using one-sample-feedback library (miSCellaneous_lib)   <em>https://github.com/meguia/ODESC</em>"""],
-		[@htl"""<img src= "https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_Max_8_software.jpg" width="80" alt="Max"><strong>&nbsp&nbsp&nbsp&nbspMax/MSP:</strong> ODE integration using custom Max package written in C"""],
-		[@htl"""<img src= "https://i.imgur.com/Y30ZFDt.png" width="250" alt="MAX"> """],
+		[@htl""" <img src="https://i.imgur.com/o3lcAuX.png" width="60" alt="Supercollider"> <strong> &nbsp&nbsp Supercollider:</strong> ODE integration using one-sample-feedback library (miSCellaneous_lib)   <em>https://github.com/meguia/ODESC</em>"""],
+		[@htl"""<img src= "https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_Max_8_software.jpg" width="60" alt="Max"><strong>&nbsp&nbsp&nbsp&nbspMax/MSP:</strong> ODE integration using custom Max package written in C"""],
+		[@htl"""<img src= "https://i.imgur.com/Y30ZFDt.png" width="200" alt="MAX"> """],
 	],
 	"7/$(nslides)";
 	subtitle = "Other implementations",

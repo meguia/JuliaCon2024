@@ -138,7 +138,7 @@ make_list_slide(
 	""" Real Time Audio Differential Equations""" ,
 	[
 		[@htl""" <img src= "https://docs.sciml.ai/DiffEqDocs/stable/assets/logo.png" width="80" alt="DifferentialEquations"> &nbsp&nbsp&nbspTake advantage of the algorithms of <em><span style="color: #1010bb"><u>DifferentialEquations.jl</span></u> </em>"""],
-		[@htl"""<img src= "https://i.imgur.com/3Ti7l6x.png" width="80" alt="PortAudio">&nbsp&nbsp&nbspUse <span style="color: #bb1010">PortAudio</span></em> to to call the integrators of <span style="color: #1010bb">DifferentialEquations</span> in a dedicated audio thread """],
+		[@htl"""<img src= "https://i.imgur.com/3Ti7l6x.png" width="80" alt="PortAudio">&nbsp&nbsp&nbspUse <span style="color: #bb1010">PortAudio</span></em> to to call the solvers of <span style="color: #1010bb">DifferentialEquations</span> in a dedicated audio thread """],
 	],
 	"8/$(nslides)", font_size=20
 )
